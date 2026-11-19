@@ -1,0 +1,11 @@
+LiberationSans-Bold.ttf is part of the Liberation Fonts family.
+
+Licence: SIL Open Font License, Version 1.1 (OFL-1.1) — a free licence.
+The Liberation fonts are released by Red Hat, Inc. and contributors under
+the SIL Open Font License 1.1, which permits use, study, copying,
+modification and redistribution, including bundling the font file with
+this app. The full licence text ships with the Liberation Fonts package
+on Debian/Ubuntu systems as /usr/share/doc/fonts-liberation/copyright.
+
+The font is used only as a generic bold sans for the cover lettering;
+no game font, logo or wordmark is reproduced.
