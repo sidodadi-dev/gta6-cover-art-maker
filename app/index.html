@@ -3,87 +3,79 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vice Panels — GTA-style Cover Art Maker</title>
+<title>Vice Panels — GTA-style cover art maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
   <aside class="panel">
     <header class="brand">
-      <h1>Vice Panels</h1>
-      <p>Turn your photos into a GTA-style cover: panels, grades, big lettering, done.</p>
+      <svg class="brand-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.8l3.1 6.9 7.5.7-5.6 5 1.6 7.4L12 18l-6.6 3.8L7 14.4 1.4 9.4l7.5-.7z"/></svg>
+      <div>
+        <h1>Vice Panels</h1>
+        <p class="tag">Turn your photos into bold, GTA-style cover art — pick a layout, drop in photos, grade it, letter it, export it.</p>
+      </div>
     </header>
 
-    <section>
-      <h2>1 · Layout</h2>
-      <label>Template
-        <select id="layout">
-          <option value="collage" selected>Collage Grid — 6 panels</option>
-          <option value="hero-strips">Hero + Strips — 4 panels</option>
-          <option value="duo">Duo / Trio Split — 3 panels</option>
-          <option value="single">Single Hero — 1 panel</option>
-        </select>
-      </label>
+    <section class="step">
+      <h2><span class="num">1</span> Layout</h2>
+      <div class="seg" id="layoutSeg" role="group" aria-label="Layout"></div>
     </section>
 
-    <section>
-      <h2>2 · Photos</h2>
-      <label class="file">Add your photos
-        <input id="photo" type="file" accept="image/*" multiple>
-      </label>
-      <p class="hint">…or drag &amp; drop them anywhere. Click a cover panel to select it, then click a photo to place it. Drag on the cover to pan the selected panel.</p>
-      <div id="tray" class="tray" aria-label="Photo tray"></div>
-      <label>Zoom of selected panel
-        <input id="zoom" type="range" min="1" max="3" step="0.05" value="1">
-      </label>
-    </section>
-
-    <section>
-      <h2>3 · Colour grade</h2>
-      <label>Grade
-        <select id="grade">
-          <option value="vice" selected>Vice Sunset</option>
-          <option value="neon">Neon Nights</option>
-          <option value="golden">Golden Hour</option>
-          <option value="noir">Noir</option>
-          <option value="none">None</option>
-        </select>
-      </label>
-    </section>
-
-    <section>
-      <h2>4 · Lettering</h2>
-      <label>Title <input id="caption" type="text" maxlength="60" value="Sunset Heist"></label>
-      <label>Subtitle <input id="subtitle" type="text" maxlength="60" placeholder="e.g. One last score"></label>
-      <div class="row">
-        <label>Position
-          <select id="titlepos">
-            <option value="bottom" selected>Bottom</option>
-            <option value="top">Top</option>
-          </select>
-        </label>
-        <label>Colour <input id="titlecolor" type="color" value="#ffffff"></label>
+    <section class="step">
+      <h2><span class="num">2</span> Photos</h2>
+      <label class="filebtn">Add photos<input id="file" type="file" accept="image/*" multiple></label>
+      <p class="hint">…or drag &amp; drop photos anywhere on this page. Click a panel on the cover to select it, then click a photo below to place it there. Drag inside a panel to move its photo.</p>
+      <div class="tray" id="tray" aria-label="Your photos"></div>
+      <div class="zoomrow">
+        <label class="grow">Panel zoom <input id="zoom" type="range" min="1" max="3" step="0.01" value="1"></label>
+        <button id="clearPanel" type="button">Clear panel</button>
       </div>
-      <label>Title size <input id="titlesize" type="range" min="0" max="1" step="0.05" value="0.6"></label>
-      <label class="check"><input id="star" type="checkbox" checked> Star motif in the corner</label>
     </section>
 
-    <section>
-      <h2>5 · Export</h2>
+    <section class="step">
+      <h2><span class="num">3</span> Grade</h2>
+      <div class="seg" id="gradeSeg" role="group" aria-label="Colour grade"></div>
+    </section>
+
+    <section class="step">
+      <h2><span class="num">4</span> Lettering</h2>
+      <label>Title <input id="title" type="text" maxlength="26" value="SUNSET HEIST" autocomplete="off"></label>
+      <label>Subtitle <input id="subtitle" type="text" maxlength="34" value="ONE LAST RIDE" autocomplete="off"></label>
+      <div class="seg" id="posSeg" role="group" aria-label="Caption position"></div>
+      <div class="rowline">
+        <span class="rowlabel">Title colour</span>
+        <div class="swatches" id="swatches" role="group" aria-label="Title colour"></div>
+      </div>
+      <label>Star motif
+        <select id="starPos">
+          <option value="none">No star</option>
+          <option value="tl">Top left</option>
+          <option value="tr" selected>Top right</option>
+          <option value="bl">Bottom left</option>
+          <option value="br">Bottom right</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="step">
+      <h2><span class="num">5</span> Export</h2>
       <label>Size
         <select id="size">
-          <option value="1080x1080" selected>1080 × 1080 — square</option>
-          <option value="1080x1350">1080 × 1350 — portrait</option>
-          <option value="1920x1080">1920 × 1080 — landscape</option>
+          <option value="1080x1080" selected>Square — 1080 × 1080</option>
+          <option value="1080x1350">Portrait — 1080 × 1350</option>
+          <option value="1920x1080">Landscape — 1920 × 1080</option>
         </select>
       </label>
-      <button id="export" type="button">Export PNG</button>
+      <button id="export" class="primary" type="button">Export PNG</button>
       <p id="status" role="status"></p>
+      <p class="hint">Everything runs on this page, offline. Your photos never leave your device.</p>
     </section>
   </aside>
 
-  <section id="stage" class="stage">
-    <canvas id="cover" width="1080" height="1080" aria-label="Your cover preview"></canvas>
+  <section class="stage">
+    <canvas id="cover" width="1080" height="1080" aria-label="Your cover art"></canvas>
+    <p class="stagehint">Click a panel to select it · drag to move the photo inside it · the amber dashed ring is editor-only and never exports</p>
   </section>
 </main>
 <script type="module" src="./src/main.js"></script>
