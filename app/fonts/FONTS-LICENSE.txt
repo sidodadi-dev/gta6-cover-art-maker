@@ -1,11 +1,28 @@
-LiberationSans-Bold.ttf is part of the Liberation Fonts family.
+Font bundled with Vice Panels
+==============================
 
-Licence: SIL Open Font License, Version 1.1 (OFL-1.1) — a free licence.
-The Liberation fonts are released by Red Hat, Inc. and contributors under
-the SIL Open Font License 1.1, which permits use, study, copying,
-modification and redistribution, including bundling the font file with
-this app. The full licence text ships with the Liberation Fonts package
-on Debian/Ubuntu systems as /usr/share/doc/fonts-liberation/copyright.
+File: LiberationSans-Bold.ttf
+Font: Liberation Sans (Bold), from the Liberation Fonts family
+Copyright: Copyright (c) 2007-2012 Red Hat, Inc. All rights reserved.
 
-The font is used only as a generic bold sans for the cover lettering;
-no game font, logo or wordmark is reproduced.
+Licence
+-------
+Liberation Sans is licensed under the SIL Open Font License, Version 1.1
+(OFL-1.1). The font is used here as the cover lettering face, loaded under
+the local family name "Vice Display" purely as a display alias; the font
+software itself is unmodified.
+
+Under the SIL Open Font License 1.1, the font may be used, studied, copied,
+merged, embedded, modified, redistributed and sold with any software,
+provided that:
+
+  * the font is not sold by itself;
+  * the copyright notice and this licence are included with copies;
+  * no modified version uses the reserved font name "Liberation" without
+    written permission from the copyright holder;
+  * the authors of the font are neither used to endorse derived work nor
+    held responsible for it.
+
+The licence is a free, libre and open source licence maintained by SIL
+International. This note summarises the bundling for this app; the licence
+terms above govern the font wherever it travels with this software.
