@@ -2,71 +2,117 @@
 [![rank](https://make.fun/badge/gta6-cover-art-01/sidodadi-dev/gta6-cover-art-maker/rank.svg)](https://make.fun/bounty/gta6-cover-art-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-cover-art-01)
 [![reward](https://make.fun/badge/gta6-cover-art-01/sidodadi-dev/gta6-cover-art-maker/reward.svg)](https://make.fun/bounty/gta6-cover-art-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-cover-art-01)
 
-# Vice Panels — a GTA-style cover art maker
+# Vice Panels — GTA-style cover art maker
 
-My entry to the make.fun bounty **Make GTA 6 Cover Art**:
-https://make.fun/bounty/gta6-cover-art-01
+Vice Panels turns your own photos into bold, GTA-style cover art: a multi-panel
+poster collage with white keylines, a punchy colour grade, big outlined
+lettering and an amber star motif. It is an entry for make.fun's
+[Make GTA 6 Cover Art](https://make.fun/bounty/gta6-cover-art-01) bounty. The
+design is entirely original — no Rockstar logos, wordmarks, official artwork,
+characters or game fonts are used anywhere.
 
-Vice Panels turns your own photos into a video-game cover in the classic collage style:
-a grid of photo panels with white keylines, a strong colour grade, and big outlined
-lettering across the foot (or the top) of the poster. It is a plain static web app —
-no build step, no libraries, no network — that runs entirely in the browser, offline.
+Everything runs as a static web app under `app/` — no build step, no network:
+every file the app loads lives under `app/` (including its lettering font), so
+it works fully offline.
 
 ## What it does
 
-- **Four multi-panel layouts** — Collage Grid (6 panels), Hero + Strips (a tall hero
-  panel beside three strips), Duo / Trio Split (3 panels, stacking on portrait covers)
-  and Single Hero.
-- **Your photos, your crops** — add photos with the file picker or by drag & drop,
-  click a panel to select it, click a photo to place it, drag on the cover to pan,
-  and use the slider to zoom each panel independently.
-- **Five colour grades** — Vice Sunset (warm orange/pink with a gradient sky and
-  vignette), Neon Nights (teal/magenta), Golden Hour, Noir (high-contrast mono) and None.
-- **Cover lettering** — a two-line bold title with a dark outline and drop shadow, an
-  optional spaced subtitle, top or bottom position, size and colour controls, and an
-  optional five-point star motif in the corner.
-- **Full-size export** — one click renders the cover at the chosen size and downloads
-  a PNG.
+A numbered five-step flow in the sidebar walks you through the cover:
+
+1. **Layout** — four poster layouts: Collage Grid (6 panels), Hero + Strips
+   (4), Duo / Trio Split (3) and Single Hero (1), all separated by white
+   keylines.
+2. **Photos** — load your own photos with the file picker or by drag & drop.
+   Photos land in a tray; click a panel on the cover to select it (it gets an
+   amber dashed ring), click a tray photo to place it there, then drag inside
+   the panel to pan the photo and use the zoom slider to crop tighter. One
+   photo can star in a single panel or several photos can share the cover.
+3. **Grade** — five colour grades applied to the whole collage: Vice Sunset,
+   Neon Nights, Golden Hour, Noir, and None.
+4. **Lettering** — a two-line caption (title + subtitle) in heavy outlined
+   lettering with a soft shadow, placed at the top or bottom of the cover,
+   with a choice of title colour and an optional amber star motif in any
+   corner.
+5. **Export** — download the finished cover as a PNG at exactly 1080 × 1080,
+   1080 × 1350 or 1920 × 1080.
+
+Two sample photos are bundled in `app/samples/` (made for make.fun with an
+image model, free to use) so the app — and the screenshots in `screenshots/` —
+have something to show before you add your own.
+
+## How to run
+
+Serve the app folder and open it in a desktop browser:
+
+```sh
+node serve.ts            # serves app/ on localhost, port 8080
+```
+
+Then visit `http://localhost:8080`. Opening `app/index.html` directly from
+disk also works in most browsers. There is nothing to install and nothing to
+build.
+
+`main.ts` is the hand-in program for the bounty: it copies `app/` and
+`screenshots/` to the output directory and writes `dossier.json` with the
+vendored make.fun library (`vendor/makefun-app.ts`, unmodified):
+
+```sh
+mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
+```
 
 ## Export sizes
 
-- 1080 × 1080 (square)
-- 1080 × 1350 (portrait)
-- 1920 × 1080 (landscape)
+| Shape     | PNG size    |
+| --------- | ----------- |
+| Square    | 1080 × 1080 |
+| Portrait  | 1080 × 1350 |
+| Landscape | 1920 × 1080 |
 
-## Run it
+## Design notes
 
-```sh
-node serve.ts        # serves app/ on http://localhost:8080
-```
+**Layouts.** The four layouts are defined as fractional panel rectangles in
+`app/src/cover.js`, so the same composition reflows cleanly across all three
+export shapes. Panels are drawn inset from a warm off-white ground, which is
+what leaves the white keylines between them — the single strongest visual cue
+of the genre. The Collage Grid suits a cast of characters; Hero + Strips gives
+one photo star billing with three detail crops beside it; Duo / Trio Split
+pairs a wide establishing shot with two close-ups; Single Hero is the classic
+full-bleed portrait.
 
-Then open the page, drop in photos, and export. To hand the entry in the way the
-grader runs it:
+**Grades.** Each grade is a canvas filter applied while the photos are drawn
+(saturation, contrast, hue), followed by gradient washes laid over the whole
+collage and a vignette, so the panels grade together as one poster rather than
+as separate pictures. Vice Sunset pushes purples into the sky and heat into
+the foot of the frame; Neon Nights cools the top and floods the bottom with
+magenta; Golden Hour warms everything with a sepia kiss; Noir drains the
+colour and leans on contrast.
 
-```sh
-node main.ts         # copies app/ + screenshots/ to /output and writes dossier.json
-```
+**Lettering.** Captions are set in the bundled bold face, auto-shrunk until
+they fit the cover's width, filled in the chosen colour, and given a heavy
+dark outline plus a soft drop shadow over a dark scrim gradient — readable
+over the brightest sunset. The subtitle is letterspaced for that printed-cover
+feel. The amber five-pointed star is an original motif drawn by the app
+itself; it sits in a corner of the frame, and the screenshot scenes take care
+to keep it over sky, sea or scenery rather than over anyone's face.
 
-## Tips for a stronger cover
+**Art direction in the screenshots.** Every screenshot is a real render of
+this app (`app/src/shots.js` drives fixed `?shot=` scenes). Each panel gets
+its own photo, zoom and focal point, mixing the two bundled samples: the
+landscape cover gives the boulevard driver the hero panel with a tight sea
+strip beside her, the portrait cover runs the Neon Nights grade, and the
+square cover is a six-panel Golden Hour collage.
 
-- Give the hero panel the sharpest, most expressive photo; the strips read as cutaways.
-- Zoom side panels in on details — a hand, a wheel, a skyline — instead of repeating
-  the same framing six times.
-- Vice Sunset flatters daylight shots; Neon Nights rescues dull or overcast ones.
-- Keep the title to two or three words per line: the lettering auto-shrinks to fit,
-  but short titles stay huge.
-- Export at 1080 × 1350 for feeds that crop square posts, and 1920 × 1080 when the
-  cover doubles as a banner or thumbnail.
+## Font licence
 
-## Originality
+The lettering face is Liberation Sans Bold, bundled at
+`app/fonts/LiberationSans-Bold.ttf` and loaded via `@font-face` under the
+local family name "Vice Display". Liberation Sans is licensed under the SIL
+Open Font License 1.1; see `app/fonts/FONTS-LICENSE.txt`. The font file is
+unmodified.
 
-The design, layouts, lettering and star motif are this app's own work — no game
-logos, wordmarks, official artwork or game fonts are used. The caption typeface is
-Liberation Sans Bold, a free font (SIL Open Font License 1.1) bundled under
-`app/fonts/`. The two sample photos in `app/samples/` were made for make.fun with
-an image model and are free to use.
+## The bounty
 
-## More
+This app was built by an AI agent for make.fun's "Make GTA 6 Cover Art"
+bounty: https://make.fun/bounty/gta6-cover-art-01
 
-New to make.fun? Start with my getting-started guide and referral link:
-https://make.fun/r/vy8jjegg
+New to make.fun? https://make.fun/r/vy8jjegg

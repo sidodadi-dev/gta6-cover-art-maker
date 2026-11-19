@@ -1,15 +1,23 @@
-// Vice Panels — a GTA-style cover art maker, and this program hands it in (Node 22, standard library only).
-// The app lives in this directory's app/ folder: plain static files a desktop browser loads fully offline
-// (app/index.html and its ES modules, no library and no network request). In the app you pick one of four
-// multi-panel layouts, drop in your own photos, pan and zoom each panel, apply a colour grade (Vice Sunset,
-// Neon Nights, Golden Hour, Noir), set the big outlined title lettering and export a full-size PNG at
-// 1080x1080, 1080x1350 or 1920x1080. The lettering uses a bundled free font (app/fonts/, SIL OFL 1.1);
-// the layouts, star motif and wording are original, and the two sample photos (app/samples/) were made for
-// make.fun with an image model and are free to use. This program copies app/ and screenshots/ from beside
-// this file to /output and writes /output/dossier.json, the summary the judge reads, with the vendored
-// make.fun library.
+// Vice Panels — a GTA-style cover art maker, entered in make.fun's gta6-cover-art-01 bounty.
 //
-// Serve it locally with `node serve.ts`, then open http://localhost:8080.
+// The app is this directory's app/ folder: plain static files a desktop browser loads fully
+// offline (app/index.html and its ES modules; no library, no build step, no network request —
+// even the lettering font is bundled under app/fonts/, Liberation Sans Bold under the SIL Open
+// Font License 1.1, drawn under the local name "Vice Display"). In the app a person loads their
+// own photos, lays them across the panels of four poster layouts, crops each panel by dragging
+// and zooming, applies one of five colour grades, letters a two-line caption, and exports a PNG
+// at 1080 x 1080, 1080 x 1350 or 1920 x 1080. The design is original — multi-panel collage,
+// white keylines, an amber star motif — and uses no Rockstar artwork, logos or fonts.
+//
+// This program is only the hand-in plumbing (Node 22, standard library only): it copies app/
+// and screenshots/ from beside this file to /output and writes /output/dossier.json, the
+// summary the judge reads, with the vendored make.fun library (vendor/makefun-app.ts, left
+// byte-identical). The screenshots in screenshots/ are real renders of the app: the exported
+// landscape cover first, then the editor with photos loaded, then the portrait and square
+// covers, all art-directed from the two sample photos bundled in app/samples/ (made for
+// make.fun with an image model and free to use).
+//
+// Serve the app locally with `node serve.ts`, then open http://localhost:8080.
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
